@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ломоносова Генриетта | QA Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Глобальные стили */
+        :root {
+            --primary: #5d5fef;
+            --primary-dark: #4b4dbf;
+            --dark: #2d3748;
+            --light: #f7fafc;
+            --gray: #718096;
+            --light-gray: #e2e8f0;
+            --accent: #f6ad55;
+            --success: #48bb78;
+            --danger: #f56565;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Шапка */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.97);
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        /* Герой секция */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(93, 95, 239, 0.1) 0%, rgba(246, 173, 85, 0.1) 100%);
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 40px;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .hero-text h1 span {
+            color: var(--primary);
+        }
+
+        .hero-text .subtitle {
+            font-size: 20px;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            border: 5px solid white;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Обо мне */
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 40px;
+        }
+
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        .about-skills {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .skills-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .skill-category {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .skill-category h4 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-size: 18px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: var(--light-gray);
+            border-radius: 20px;
+            margin: 0 8px 8px 0;
+            font-size: 14px;
+            color: var(--dark);
+        }
+
+        .skill-tag:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Опыт работы */
+        .experience {
+            background-color: #f8f9fa;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: var(--light-gray);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 30px);
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: calc(50% + 30px);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px var(--primary);
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .timeline-date {
+            display: inline-block;
+            margin-bottom: 10px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .timeline-content h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .timeline-content p.company {
+            color: var(--gray);
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        /* Проекты */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .project-info p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: var(--light-gray);
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--dark);
+        }
+
+        .tag.qa {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .tag.testing {
+            background-color: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .tag.automation {
+            background-color: #fff3e0;
+            color: #f57c00;
+        }
+
+        /* Сертификаты */
+        .certificates {
+            background-color: #f8f9fa;
+        }
+
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .certificate-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .certificate-image {
+            height: 200px;
+            overflow: hidden;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .certificate-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .certificate-info {
+            padding: 20px;
+        }
+
+        .certificate-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .certificate-info p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        /* Контакты */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 20px;
+        }
+
+        .contact-text h3 {
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .contact-text p, .contact-text a {
+            color: var(--gray);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(93, 95, 239, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Подвал */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-col p {
+            margin-bottom: 20px;
+            color: #cbd5e1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .hero-text h1 {
+                font-size: 36px;
+            }
+            
+            .timeline::before {
+                left: 31px;
+            }
+            
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding-left: 80px;
+                padding-right: 0;
+                text-align: left;
+            }
+            
+            .timeline-dot {
+                left: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                transition: all 0.3s ease;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hero-text, .about-text {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .hero {
+                padding: 120px 0 60px;
+                min-height: auto;
+            }
+            
+            .hero-content, .about-content {
+                flex-direction: column;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-text h1 {
+                font-size: 28px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Ломоносова <span>Генриетта</span></a>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#about">Обо мне</a></li>
+                    <li><a href="#experience">Опыт</a></li>
+                    <li><a href="#projects">Проекты</a></li>
+                    <li><a href="#certificates">Сертификаты</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="subtitle">QA Engineer</span>
+                    <h1>Привет, я <span>Генриетта Ломоносова</span></h1>
+                    <p>Выпускница школы QA Studio с фундаментальными знаниями в тестировании программного обеспечения. Специализируюсь на ручном и автоматизированном тестировании, обеспечиваю качество продуктов на всех этапах разработки.</p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">Мои проекты</a>
+                        <a href="#contact" class="btn btn-outline">Связаться</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="me.jpg" alt="Ломоносова Генриетта">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Обо мне -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Обо мне</h2>
+                <p>Узнайте больше о моих навыках, образовании и подходе к тестированию</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>QA Engineer с аналитическим складом ума</h3>
+                    <p>Я окончила школу QA Studio с отличием, где получила фундаментальные знания в области тестирования программного обеспечения. Мой подход к тестированию сочетает технические навыки с вниманием к деталям и пользовательскому опыту.</p>
+                    <p>Я умею не только находить дефекты, но и анализировать их причины, предлагать решения для улучшения качества продукта. Постоянно изучаю новые инструменты и методологии тестирования, чтобы оставаться в курсе современных тенденций.</p>
+                    <p>В свободное время участвую в тестовых сообществах, решаю задачи на платформах для тестировщиков и совершенствую свои навыки автоматизации.</p>
+                </div>
+                <div class="about-skills">
+                    <div class="skills-categories">
+                        <div class="skill-category">
+                            <h4>Тестирование</h4>
+                            <span class="skill-tag">Функциональное тестирование</span>
+                            <span class="skill-tag">Регрессионное тестирование</span>
+                            <span class="skill-tag">Дымовое тестирование</span>
+                            <span class="skill-tag">Тестирование API</span>
+                            <span class="skill-tag">Тестирование UI</span>
+                            <span class="skill-tag">Тест-дизайн</span>
+                            <span class="skill-tag">Чек-листы</span>
+                            <span class="skill-tag">Тест-кейсы</span>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Инструменты</h4>
+                            <span class="skill-tag">Postman</span>
+                            <span class="skill-tag">JIRA</span>
+                            <span class="skill-tag">TestRail</span>
+                            <span class="skill-tag">Selenium</span>
+                            <span class="skill-tag">Charles Proxy</span>
+                            <span class="skill-tag">DevTools</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">SQL</span>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Технические навыки</h4>
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Базы данных</span>
+                            <span class="skill-tag">HTTP/HTTPS</span>
+                            <span class="skill-tag">REST API</span>
+                            <span class="skill-tag">JSON/XML</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Опыт работы -->
+    <section class="section experience" id="experience">
+        <div class="container">
+            <div class="section-title">
+                <h2>Опыт работы</h2>
+                <p>Мой профессиональный путь в тестировании</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2023 - Настоящее время</span>
+                        <h3>Junior QA Engineer</h3>
+                        <p class="company">Digital Solutions (учебный проект)</p>
+                        <ul style="margin-left: 20px; color: var(--gray);">
+                            <li>Проведение функционального и регрессионного тестирования веб-приложений</li>
+                            <li>Составление тест-кейсов и чек-листов</li>
+                            <li>Ведение баг-репортов в JIRA</li>
+                            <li>Участие в планировании спринтов</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2022 - 2023</span>
+                        <h3>Стажер QA</h3>
+                        <p class="company">IT Academy (учебная практика)</p>
+                        <ul style="margin-left: 20px; color: var(--gray);">
+                            <li>Изучение основ тестирования ПО</li>
+                            <li>Практика написания тест-кейсов</li>
+                            <li>Работа с тестовой документацией</li>
+                            <li>Основы автоматизации тестирования</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2022</span>
+                        <h3>Курс QA Engineer</h3>
+                        <p class="company">Школа QA Studio</p>
+                        <ul style="margin-left: 20px; color: var(--gray);">
+                            <li>Освоение полного цикла тестирования ПО</li>
+                            <li>Работа с реальными проектами</li>
+                            <li>Изучение инструментов тестирования</li>
+                            <li>Основы программирования для тестировщиков</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Проекты -->
+    <section class="section" id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Мои проекты</h2>
+                <p>Примеры моих работ в области тестирования</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Проект 1">
+                    </div>
+                    <div class="project-info">
+                        <h3>Тестирование интернет-магазина</h3>
+                        <p>Полный цикл тестирования e-commerce платформы: от составления тест-плана до регрессионного тестирования.</p>
+                        <div class="project-tags">
+                            <span class="tag qa">Functional Testing</span>
+                            <span class="tag testing">Test Cases</span>
+                            <span class="tag testing">Bug Reports</span>
+                        </div>
+                        <a href="#" class="btn btn-outline">Подробнее</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Проект 2">
+                    </div>
+                    <div class="project-info">
+                        <h3>Автоматизация тестирования API</h3>
+                        <p>Создание набора автотестов для REST API с использованием Postman и JavaScript.</p>
+                        <div class="project-tags">
+                            <span class="tag automation">API Testing</span>
+                            <span class="tag automation">Postman</span>
+                            <span class="tag qa">Automation</span>
+                        </div>
+                        <a href="#" class="btn btn-outline">Подробнее</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Проект 3">
+                    </div>
+                    <div class="project-info">
+                        <h3>Тестирование мобильного приложения</h3>
+                        <p>Тестирование iOS и Android приложения с упором на UX и кросс-платформенную совместимость.</p>
+                        <div class="project-tags">
+                            <span class="tag testing">Mobile Testing</span>
+                            <span class="tag qa">UX Testing</span>
+                            <span class="tag testing">Compatibility</span>
+                        </div>
+                        <a href="#" class="btn btn-outline">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Сертификаты -->
+    <section class="section certificates" id="certificates">
+        <div class="container">
+            <div class="section-title">
+                <h2>Сертификаты</h2>
+                <p>Подтверждение моих знаний и навыков</p>
+            </div>
+            <div class="certificates-grid">
+                <div class="certificate-card">
+                    <div class="certificate-image">
+                        <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Сертификат 1">
+                    </div>
+                    <div class="certificate-info">
+                        <h3>QA Engineer</h3>
+                        <p>Школа QA Studio, 2022</p>
+                        <p>Фундаментальный курс по тестированию ПО с практикой на реальных проектах.</p>
+                        <a href="#" class="btn btn-outline">Посмотреть</a>
+                    </div>
+                </div>
+                <div class="certificate-card">
+                    <div class="certificate-image">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Сертификат 2">
+                    </div>
+                    <div class="certificate-info">
+                        <h3>Postman для тестирования API</h3>
+                        <p>Stepik, 2023</p>
+                        <p>Курс по автоматизации тестирования API с использованием Postman и JavaScript.</p>
+                        <a href="#" class="btn btn-outline">Посмотреть</a>
+                    </div>
+                </div>
+                <div class="certificate-card">
+                    <div class="certificate-image">
+                        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Сертификат 3">
+                    </div>
+                    <div class="certificate-info">
+                        <h3>Основы SQL для тестировщиков</h3>
+                        <p>Coursera, 2023</p>
+                        <p>Практический курс по работе с базами данных для целей тестирования.</p>
+                        <a href="#" class="btn btn-outline">Посмотреть</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Контакты</h2>
+                <p>Свяжитесь со мной для обсуждения возможностей сотрудничества</p>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Адрес</h3>
+                        <p>Москва, Россия</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Email</h3>
+                        <a href="mailto:lomonosova.qa@example.com">lomonosova.qa@gmail.com</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Телефон</h3>
+                        <a href="tel:+79991234567">+7 (999) 678-94-64</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>LinkedIn</h3>
+                        <a href="https://linkedin.com/in/lomonosova-qa" target="_blank">linkedin.com/in/lomonosova-qa</a>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Тема</label>
+                        <input type="text" id="subject" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Отправить сообщение</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Ломоносова Генриетта</h3>
+                    <p>QA Engineer с фундаментальными знаниями в тестировании ПО и страстью к качеству продуктов.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Навыки</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Ручное тестирование</a></li>
+                        <li><a href="#">Тест-дизайн</a></li>
+                        <li><a href="#">API тестирование</a></li>
+                        <li><a href="#">Автоматизация</a></li>
+                        <li><a href="#">Работа с базами данных</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Быстрые ссылки</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#about">Обо мне</a></li>
+                        <li><a href="#experience">Опыт</a></li>
+                        <li><a href="#projects">Проекты</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Контакты</h3>
+                    <p><i class="fas fa-envelope"></i> lomonosova.qa@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +7 (999) 678-94-64</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Москва, Россия</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Ломоносова Генриетта. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Анимация при скролле
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.timeline-item, .project-card, .certificate-card');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Инициализация анимации
+        window.addEventListener('load', () => {
+            const elements = document.querySelectorAll('.timeline-item, .project-card, .certificate-card');
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'all 0.6s ease';
+            });
+            
+            animateOnScroll();
+        });
+        
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>
